@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《天彬TianBIN》 | 世界官网 - 简体中文</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --primary-light: #85c1e9;
+            --secondary-color: #9b59b6;
+            --accent-color: #f1c40f;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --bg-light: #f8f9fa;
+            --bg-dark: #1a1f2e;
+            --bg-darker: #0f131f;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background: rgba(26, 31, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(26, 31, 46, 0.98);
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* 英雄区域 */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(15, 19, 31, 0.8), rgba(15, 19, 31, 0.9)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 60px;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-accent {
+            background: var(--accent-color);
+            color: var(--text-dark);
+        }
+
+        .btn-accent:hover {
+            background: #e6b30a;
+            color: var(--text-dark);
+        }
+
+        /* 下载区域样式 */
+        .download-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .download-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--primary-light);
+        }
+
+        .download-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .download-option {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .download-option:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .platform-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-light);
+        }
+
+        .platform-name {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .file-size {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .download-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        /* 游戏介绍区域 */
+        .game-section {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .game-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        /* 世界观部分 */
+        .worldview-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(15, 19, 31, 0.9), rgba(15, 19, 31, 0.9)), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .worldview-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .worldview-content {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+        }
+
+        .worldview-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+        }
+
+        /* 玩法特色部分 */
+        .features-section {
+            padding: 100px 0;
+            background-color: var(--bg-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* 开发历程部分 */
+        .timeline-section {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .timeline-date {
+            flex: 1;
+            min-width: 250px;
+            padding: 40px 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .timeline-content {
+            flex: 2;
+            min-width: 300px;
+            padding: 40px 30px;
+        }
+
+        .time-period {
+            display: inline-block;
+            background: var(--bg-light);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-left: 15px;
+            color: var(--text-dark);
+        }
+
+        .bg-green {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .bg-orange {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .bg-blue {
+            background: linear-gradient(135deg, var(--primary-color), #2980b9);
+        }
+
+        .bg-purple {
+            background: linear-gradient(135deg, var(--secondary-color), #8e44ad);
+        }
+
+        .text-green {
+            color: #2ecc71;
+        }
+
+        .text-orange {
+            color: #f39c12;
+        }
+
+        .text-blue {
+            color: var(--primary-color);
+        }
+
+        .text-purple {
+            color: var(--secondary-color);
+        }
+
+        /* 平台支持部分 */
+        .platform-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(15, 19, 31, 0.9), rgba(15, 19, 31, 0.9)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .platform-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .platform-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            width: 280px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .platform-item:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--bg-darker);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-dark);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 10px 0;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .timeline-item {
+                flex-direction: column;
+            }
+            .timeline-date {
+                min-width: 100%;
+            }
+            .download-options {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .download-section {
+                padding: 20px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">《天彬TianBIN》<span>世界官网</span></a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#worldview" class="active">世界观</a></li>
+                <li><a href="#features">玩法特色</a></li>
+                <li><a href="#timeline">开发历程</a></li>
+                <li><a href="#platform">平台支持</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 下载区域 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1 class="hero-title">《天彬TianBIN》</h1>
+                <p class="hero-subtitle">玄科双生 · 修真与科技的史诗碰撞</p>
+                <p class="hero-description">
+                    在公元8956年的天彬大陆，修真玄力与未来科技交织碰撞，演绎一场跨越时空的史诗冒险。
+                    探索表里世界的奥秘，揭开祖帝苏天彬的灭世之谜，重塑双生宇宙的命运。
+                </p>
+                <a href="https://www.tianbin.net/" class="btn btn-accent">立即下载</a>
+                <a href="#platform" class="btn btn-outline">平台支持</a>
+
+                <!-- 新增下载区域 -->
+                <div class="download-section fade-in-up delay-1">
+                    <h3 class="download-title">选择您的平台</h3>
+                    <div class="download-options">
+                        <div class="download-option">
+                            <i class="fab fa-windows platform-icon"></i>
+                            <h4 class="platform-name">Windows</h4>
+                            <p class="file-size">约 8.9 GB</p>
+                            <a href="https://www.tianbin.net/cn/index.html" class="btn">下载</a>
+                        </div>
+                        <div class="download-option">
+                            <i class="fab fa-android platform-icon"></i>
+                            <h4 class="platform-name">Android</h4>
+                            <p class="file-size">约 5.6 GB</p>
+                            <a href="https://www.tianbin.net/cn/index.html" class="btn">下载</a>
+                        </div>
+                        <div class="download-option">
+                            <i class="fas fa-globe platform-icon"></i>
+                            <h4 class="platform-name">网页版</h4>
+                            <p class="file-size">无需下载</p>
+                            <a href="https://www.tianbin.net/cn/index.html" class="btn">立即体验</a>
+                        </div>
+                    </div>
+
+                    <div class="download-stats fade-in-up delay-2">
+                        <div class="stat-item">
+                            <div class="stat-number">56W+</div>
+                            <div class="stat-label">下载次数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.9</div>
+                            <div class="stat-label">用户评分</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">89K+</div>
+                            <div class="stat-label">在线玩家</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏介绍区域 -->
+    <section class="game-section">
+        <div class="container">
+            <h2 class="section-title">游戏核心</h2>
+            <div class="game-grid">
+                <div class="game-card fade-in-up">
+                    <i class="fas fa-globe-asia game-icon"></i>
+                    <h3 class="game-name">双生宇宙</h3>
+                    <p>东方修真与未来科技完美融合，形成独特的"玄科双生"体系</p>
+                </div>
+                <div class="game-card fade-in-up delay-1">
+                    <i class="fas fa-layer-group game-icon"></i>
+                    <h3 class="game-name">表里世界</h3>
+                    <p>表世界三族争霸，里世界邪魔横行，双界平衡由你掌握</p>
+                </div>
+                <div class="game-card fade-in-up delay-2">
+                    <i class="fas fa-dragon game-icon"></i>
+                    <h3 class="game-name">阵营对抗</h3>
+                    <p>玄士（法术召唤）与科士（机械武器）两大阵营的史诗对抗</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 世界观部分 -->
+    <section id="worldview" class="worldview-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">世界观设定</h2>
+            <div class="worldview-container">
+                <div class="worldview-content fade-in-up">
+                    <h3 class="worldview-title">核心设定</h3>
+                    <p>公元8956年，"蓝星帝国"意外坠入天彬大陆，人族建立天斯城后遭妖族、魔族入侵。祖帝苏天彬率领玄士击退外敌，却因阵营分裂引发灭世灾难"天灭众生"。玩家使命是探索表里世界冲突真相，揭开祖帝苏天彬灭世之谜。</p>
+                </div>
+
+                <div class="worldview-content fade-in-up delay-1">
+                    <h3 class="worldview-title">玄科双生体系</h3>
+                    <p>玩家可选择成为灵力掌控者（玄士）、机械驾驭者（科士）或双修跨界者。修真系统包含灵气修炼、功法学习、炼丹炼器、渡劫飞升；科技系统包含机甲组装、AI操控、基因改造、星际科技；双修系统支持跨界融合玩法。</p>
+                </div>
+
+                <div class="worldview-content fade-in-up delay-2">
+                    <h3 class="worldview-title">多元种族</h3>
+                    <p>人族、妖族、魔族三大种族各具专属技能，玩家可自由选择种族加入不同阵营，参与领土争夺、资源分配等政治经济活动，影响整个天彬大陆的命运走向。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 玩法特色部分 -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">玩法特色</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <i class="fas fa-map-marked-alt feature-icon"></i>
+                    <h3>沙盒探索</h3>
+                    <p>无缝六边形大地图覆盖雪山/沙漠/绿洲等生态，包含隐藏宝藏与随机奇遇</p>
+                </div>
+
+                <div class="feature-card fade-in-up delay-1">
+                    <i class="fas fa-fist-raised feature-icon"></i>
+                    <h3>动态战斗</h3>
+                    <p>横版2.5D俯视角实时战斗，强调连招组合、走位与团队配合</p>
+                </div>
+
+                <div class="feature-card fade-in-up delay-2">
+                    <i class="fas fa-chess-board feature-icon"></i>
+                    <h3>领土攻占</h3>
+                    <p>六边形策略地图中争夺领地，攻占即触发PVP，影响世界格局</p>
+                </div>
+
+                <div class="feature-card fade-in-up">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3>社交建设</h3>
+                    <p>组建探险队攻克副本，建立势力影响世界政治经济格局</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 开发历程部分 -->
+    <section id="timeline" class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">开发历程</h2>
+            <div class="timeline-item fade-in-up">
+                <div class="timeline-date bg-green">2017年</div>
+                <div class="timeline-content">
+                    <h3 class="text-green">项目启动 <span class="time-period">(2017年3月)</span></h3>
+                    <p>《天彬TianBIN》首次立项，由文天玩网络科技创始人苏天彬（李文飞）发起，确立玄科双生的核心世界观。</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in-up delay-1">
+                <div class="timeline-date bg-blue">2024年</div>
+                <div class="timeline-content">
+                    <h3 class="text-blue">技术突破 <span class="time-period">(2024年3月)</span></h3>
+                    <p>完成Unity引擎核心技术开发，实现横版2.5D沙盒地图与双修系统，跨年玩家突破56万。</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in-up delay-2">
+                <div class="timeline-date bg-orange">2025年</div>
+                <div class="timeline-content">
+                    <h3 class="text-orange">项目暂停 <span class="time-period">(2025年初)</span></h3>
+                    <p>因技术重构需求项目暂时终止，团队聚焦AI大模型与美术风格升级。</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in-up">
+                <div class="timeline-date bg-purple">2028年</div>
+                <div class="timeline-content">
+                    <h3 class="text-purple">重启开发 <span class="time-period">(2028年3月)</span></h3>
+                    <p>项目重新启动，采用自研AI大模型增强交互体验，优化二次元美术风格。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 平台支持部分 -->
+    <section id="platform" class="platform-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">平台支持</h2>
+            <div class="platform-items">
+                <div class="platform-item fade-in-up">
+                    <i class="fas fa-desktop platform-icon"></i>
+                    <h3>电脑版</h3>
+                    <p>Windows系统</p>
+                    <p>高性能PC体验</p>
+                </div>
+
+                <div class="platform-item fade-in-up delay-1">
+                    <i class="fas fa-mobile-alt platform-icon"></i>
+                    <h3>手机端</h3>
+                    <p>Android系统</p>
+                    <p>随时随地畅玩</p>
+                </div>
+
+                <div class="platform-item fade-in-up delay-2">
+                    <i class="fas fa-laptop-code platform-icon"></i>
+                    <h3>网页版</h3>
+                    <p>Web平台</p>
+                    <p>无需下载即玩</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">《天彬TianBIN》</h3>
+                    <p>玄科双生 · 修真与科技的史诗碰撞</p>
+                    <p>文天玩网络科技有限公司荣誉出品</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-title">游戏资源</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://m.tianbin.net/">木</a>框架官网</li>
+                        <li><a href="https://www.tianbin.net/">天彬官网</a></li>
+                        <li><a href="https://intl.TianBIN.net/">世界官网</a></li>
+                        <li><a href="https://www.wentianplay.top">新闻资讯</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-title">关注我们</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-weibo"></i> 官方微博</a></li>
+                        <li><a href="#"><i class="fab fa-bilibili"></i> B站官方</a></li>
+                        <li><a href="https://www.wentianplay.com/index/"><i class="fab fa-qq"></i> 官方QQ群</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 文天玩网络科技有限公司 | 《天彬TianBIN》世界官网 - 保留所有权利
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 移动端菜单切换
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // 滚动动画
+        function checkScroll() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // 初始化滚动动画
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
