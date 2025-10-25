@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《天彬TianBIN》 | ワールド公式サイト - 日本語</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* スタイルは変更なし（CSS部分は同じ） */
+        :root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --primary-light: #85c1e9;
+            --secondary-color: #9b59b6;
+            --accent-color: #f1c40f;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --bg-light: #f8f9fa;
+            --bg-dark: #1a1f2e;
+            --bg-darker: #0f131f;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ナビゲーションバースタイル */
+        .navbar {
+            background: rgba(26, 31, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(26, 31, 46, 0.98);
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ヒーローエリア */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(15, 19, 31, 0.8), rgba(15, 19, 31, 0.9)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 60px;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-accent {
+            background: var(--accent-color);
+            color: var(--text-dark);
+        }
+
+        .btn-accent:hover {
+            background: #e6b30a;
+            color: var(--text-dark);
+        }
+
+        /* ダウンロードセクションのスタイル */
+        .download-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .download-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--primary-light);
+        }
+
+        .download-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .download-option {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .download-option:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .platform-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-light);
+        }
+
+        .platform-name {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .file-size {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .download-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        /* ゲーム紹介エリア */
+        .game-section {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .game-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        /* 世界観部分 */
+        .worldview-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(15, 19, 31, 0.9), rgba(15, 19, 31, 0.9)), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .worldview-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .worldview-content {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+        }
+
+        .worldview-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+        }
+
+        /* ゲームプレイ特徴部分 */
+        .features-section {
+            padding: 100px 0;
+            background-color: var(--bg-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* 開発履歴部分 */
+        .timeline-section {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .timeline-date {
+            flex: 1;
+            min-width: 250px;
+            padding: 40px 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .timeline-content {
+            flex: 2;
+            min-width: 300px;
+            padding: 40px 30px;
+        }
+
+        .time-period {
+            display: inline-block;
+            background: var(--bg-light);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-left: 15px;
+            color: var(--text-dark);
+        }
+
+        .bg-green {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .bg-orange {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .bg-blue {
+            background: linear-gradient(135deg, var(--primary-color), #2980b9);
+        }
+
+        .bg-purple {
+            background: linear-gradient(135deg, var(--secondary-color), #8e44ad);
+        }
+
+        .text-green {
+            color: #2ecc71;
+        }
+
+        .text-orange {
+            color: #f39c12;
+        }
+
+        .text-blue {
+            color: var(--primary-color);
+        }
+
+        .text-purple {
+            color: var(--secondary-color);
+        }
+
+        /* プラットフォームサポート部分 */
+        .platform-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(15, 19, 31, 0.9), rgba(15, 19, 31, 0.9)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .platform-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .platform-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            width: 280px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .platform-item:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* フッター */
+        footer {
+            background-color: var(--bg-darker);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-dark);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 10px 0;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .timeline-item {
+                flex-direction: column;
+            }
+            .timeline-date {
+                min-width: 100%;
+            }
+            .download-options {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .download-section {
+                padding: 20px;
+            }
+        }
+
+        /* アニメーション効果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- ナビゲーションバー -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">《天彬TianBIN》<span>ワールド公式サイト</span></a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#worldview" class="active">世界観</a></li>
+                <li><a href="#features">ゲームプレイ特徴</a></li>
+                <li><a href="#timeline">開発履歴</a></li>
+                <li><a href="#platform">プラットフォームサポート</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ダウンロードエリア -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1 class="hero-title">《天彬TianBIN》</h1>
+                <p class="hero-subtitle">玄科双生 · 修真とテクノロジーの壮大な衝突</p>
+                <p class="hero-description">
+                    西暦8956年の天彬大陸で、修真の玄力と未来のテクノロジーが交錯し、時空を超えた壮大な冒険が繰り広げられます。
+                    表裏世界の謎を探求し、祖帝蘇天彬の滅世の謎を解き明かし、双生宇宙の運命を再構築しましょう。
+                </p>
+                <a href="https://www.tianbin.net/" class="btn btn-accent">今すぐダウンロード</a>
+                <a href="#platform" class="btn btn-outline">プラットフォームサポート</a>
+                
+                <!-- 新規ダウンロードエリア -->
+                <div class="download-section fade-in-up delay-1">
+                    <h3 class="download-title">プラットフォームを選択</h3>
+                    <div class="download-options">
+                        <div class="download-option">
+                            <i class="fab fa-windows platform-icon"></i>
+                            <h4 class="platform-name">Windows</h4>
+                            <p class="file-size">約 8.9 GB</p>
+                            <a href="https://www.tianbin.net/" class="btn">ダウンロード</a>
+                        </div>
+                        <div class="download-option">
+                            <i class="fab fa-android platform-icon"></i>
+                            <h4 class="platform-name">Android</h4>
+                            <p class="file-size">約 5.6 GB</p>
+                            <a href="https://www.tianbin.net/" class="btn">ダウンロード</a>
+                        </div>
+                        <div class="download-option">
+                            <i class="fas fa-globe platform-icon"></i>
+                            <h4 class="platform-name">ウェブ版</h4>
+                            <p class="file-size">ダウンロード不要</p>
+                            <a href="https://www.tianbin.net/" class="btn">今すぐ体験</a>
+                        </div>
+                    </div>
+                    
+                    <div class="download-stats fade-in-up delay-2">
+                        <div class="stat-item">
+                            <div class="stat-number">56W+</div>
+                            <div class="stat-label">ダウンロード数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.9</div>
+                            <div class="stat-label">ユーザー評価</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">89K+</div>
+                            <div class="stat-label">オンラインプレイヤー</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ゲーム紹介エリア -->
+    <section class="game-section">
+        <div class="container">
+            <h2 class="section-title">ゲームの核心</h2>
+            <div class="game-grid">
+                <div class="game-card fade-in-up">
+                    <i class="fas fa-globe-asia game-icon"></i>
+                    <h3 class="game-name">双生宇宙</h3>
+                    <p>東洋の修真と未来のテクノロジーが完璧に融合し、独自の「玄科双生」システムを形成</p>
+                </div>
+                <div class="game-card fade-in-up delay-1">
+                    <i class="fas fa-layer-group game-icon"></i>
+                    <h3 class="game-name">表裏世界</h3>
+                    <p>表世界では三種族が覇権を争い、裏世界では邪魔が横行、二つの世界のバランスはあなたの手に</p>
+                </div>
+                <div class="game-card fade-in-up delay-2">
+                    <i class="fas fa-dragon game-icon"></i>
+                    <h3 class="game-name">陣営対抗</h3>
+                    <p>玄士（魔法召喚）と科士（機械武器）二大陣営の壮大な対抗</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 世界観部分 -->
+    <section id="worldview" class="worldview-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">世界観設定</h2>
+            <div class="worldview-container">
+                <div class="worldview-content fade-in-up">
+                    <h3 class="worldview-title">核心設定</h3>
+                    <p>西暦8956年、「藍星帝国」が天彬大陸に墜落し、人族が天斯城を建設した後、妖族と魔族の侵攻を受けました。祖帝蘇天彬は玄士を率いて外敵を撃退しましたが、陣営の分裂により「天滅衆生」という滅世の災害を引き起こしました。プレイヤーの使命は表裏世界の衝突の真実を探求し、祖帝蘇天彬の滅世の謎を解き明かすことです。</p>
+                </div>
+                
+                <div class="worldview-content fade-in-up delay-1">
+                    <h3 class="worldview-title">玄科双生システム</h3>
+                    <p>プレイヤーは霊力の制御者（玄士）、機械の操縦者（科士）、または両方を修得するクロスオーバー者を選択できます。修真システムには霊気修煉、功法学習、錬丹錬器、渡劫飛升が含まれ、科技システムには機甲組立、AI操作、遺伝子改造、星間科技が含まれ、双修システムはクロスオーバー融合プレイをサポートします。</p>
+                </div>
+                
+                <div class="worldview-content fade-in-up delay-2">
+                    <h3 class="worldview-title">多様な種族</h3>
+                    <p>人族、妖族、魔族の三大種族はそれぞれ独自のスキルを持ち、プレイヤーは自由に種族を選択して異なる陣営に参加し、領土争奪、資源分配などの政治的経済的活動に参加し、天彬大陸全体の運命の行方を左右できます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ゲームプレイ特徴部分 -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">ゲームプレイ特徴</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <i class="fas fa-map-marked-alt feature-icon"></i>
+                    <h3>サンドボックス探索</h3>
+                    <p>雪山/砂漠/オアシスなどの生態系をカバーするシームレスな六角形の大地図には、隠された宝とランダムなイベントが含まれています</p>
+                </div>
+                
+                <div class="feature-card fade-in-up delay-1">
+                    <i class="fas fa-fist-raised feature-icon"></i>
+                    <h3>ダイナミックな戦闘</h3>
+                    <p>横スクロール2.5D俯瞰視点のリアルタイム戦闘で、コンボ連携、ポジショニング、チーム連携を重視</p>
+                </div>
+                
+                <div class="feature-card fade-in-up delay-2">
+                    <i class="fas fa-chess-board feature-icon"></i>
+                    <h3>領土占領</h3>
+                    <p>六角形の戦略地図で領地を争奪し、占領するとPVPが発生し、世界情勢に影響を与えます</p>
+                </div>
+                
+                <div class="feature-card fade-in-up">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3>ソーシャル構築</h3>
+                    <p>探検隊を組んでダンジョンを攻略し、勢力を築いて世界の政治経済情勢に影響を与えます</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 開発履歴部分 -->
+    <section id="timeline" class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">開発履歴</h2>
+            <div class="timeline-item fade-in-up">
+                <div class="timeline-date bg-green">2017年</div>
+                <div class="timeline-content">
+                    <h3 class="text-green">プロジェクト開始 <span class="time-period">(2017年3月)</span></h3>
+                    <p>《天彬TianBIN》が初めて立ち上げられ、文天玩網絡科技の創設者である蘇天彬（李文飛）によって発案され、玄科双生の核心となる世界観が確立されました。</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item fade-in-up delay-1">
+                <div class="timeline-date bg-blue">2024年</div>
+                <div class="timeline-content">
+                    <h3 class="text-blue">技術的ブレークスルー <span class="time-period">(2024年3月)</span></h3>
+                    <p>Unityエンジンの核心技術開発を完了し、横スクロール2.5Dサンドボックスマップと双修システムを実現し、年末までにプレイヤー数が56万人を突破しました。</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item fade-in-up delay-2">
+                <div class="timeline-date bg-orange">2025年</div>
+                <div class="timeline-content">
+                    <h3 class="text-orange">プロジェクト一時停止 <span class="time-period">(2025年初)</span></h3>
+                    <p>技術的再構築の必要性によりプロジェクトは一時的に終了し、チームはAI大規模モデルと美術スタイルのアップグレードに焦点を当てました。</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item fade-in-up">
+                <div class="timeline-date bg-purple">2028年</div>
+                <div class="timeline-content">
+                    <h3 class="text-purple">開発再開 <span class="time-period">(2028年3月)</span></h3>
+                    <p>プロジェクトが再始動し、独自開発のAI大規模モデルを採用してインタラクション体験を強化し、二次元美術スタイルを最適化しました。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- プラットフォームサポート部分 -->
+    <section id="platform" class="platform-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">プラットフォームサポート</h2>
+            <div class="platform-items">
+                <div class="platform-item fade-in-up">
+                    <i class="fas fa-desktop platform-icon"></i>
+                    <h3>PC版</h3>
+                    <p>Windowsシステム</p>
+                    <p>高性能PC体験</p>
+                </div>
+                
+                <div class="platform-item fade-in-up delay-1">
+                    <i class="fas fa-mobile-alt platform-icon"></i>
+                    <h3>モバイル端末</h3>
+                    <p>Androidシステム</p>
+                    <p>いつでもどこでも楽しめる</p>
+                </div>
+                
+                <div class="platform-item fade-in-up delay-2">
+                    <i class="fas fa-laptop-code platform-icon"></i>
+                    <h3>ウェブ版</h3>
+                    <p>Webプラットフォーム</p>
+                    <p>ダウンロード不要ですぐにプレイ可能</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">《天彬TianBIN》</h3>
+                    <p>玄科双生 · 修真とテクノロジーの壮大な衝突</p>
+                    <p>文天玩網絡科技有限公司荣誉出品</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">ゲームリソース</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://m.tianbin.net/">木</a>フレームワーク公式サイト</li>
+                        <li><a href="https://www.tianbin.net/">天彬公式サイト</a></li>
+                        <li><a href="https://intl.TianBIN.net/">ワールド公式サイト</a></li>
+                        <li><a href="https://www.wentianplay.top">ニュース情報</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">フォローする</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-weibo"></i> 公式ウェイボー</a></li>
+                        <li><a href="#"><i class="fab fa-bilibili"></i> B站公式</a></li>
+                        <li><a href="https://www.wentianplay.com/index/"><i class="fab fa-qq"></i> 公式QQグループ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 文天玩網絡科技有限公司 | 《天彬TianBIN》ワールド公式サイト - 全著作権所有
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ナビゲーションバースクロール効果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // モバイルメニュー切り替え
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // スクロールアニメーション
+        function checkScroll() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // スクロールアニメーションを初期化
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+        
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
